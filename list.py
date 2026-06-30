@@ -1,8 +1,10 @@
 def remove_duplicates(lst):
     result = []
+    is_set = set()
 
     for item in lst:
-        if item not in result:
+        if item not in is_set:
+            is_set.add(item)
             result.append(item)
 
     return result
@@ -18,7 +20,11 @@ def merge_lists(list1, list2):
     return list(set(new_list))
 
 def is_sorted(lst):
-    return lst == sorted(lst)
+    for i in range(len(lst) - 1):
+        if lst[i] > lst[i + 1]:
+            return False
+
+    return True
 
 def merge_lists2(list1, list2):
     if len(list1) != len(list2):
@@ -26,8 +32,8 @@ def merge_lists2(list1, list2):
 
     result = []
 
-    for i in range(len(list1)):
-        result.append(list1[i] + list2[i])
+    for first, second in zip(list1, list2):
+        result.append(first + second)
 
     return result
 
