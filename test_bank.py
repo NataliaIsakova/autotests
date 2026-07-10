@@ -1,10 +1,10 @@
 from OOP import SavingsAccount
 
 
-def test_balance_positive():
+def test_balance_after_interest():
     acc = SavingsAccount("Анна")
     acc.deposit(500)
     acc.withdraw(100)
     acc.apply_interest()
 
-    assert acc.get_balance() > 0
+    assert acc.get_balance() == 420
