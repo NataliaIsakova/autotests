@@ -33,9 +33,18 @@ class SavingsAccount(BankAccount):
 
 
 class CheckingAccount(BankAccount):
-    def withdraw(self, amount):
-        self._balance -= amount
+    def __init__(self, owner, balance=0, overdraft_limit=1000):
+        super().__init__(owner, balance)
+        self.overdraft_limit = overdraft_limit
 
+    def withdraw(self, amount):
+        if amount <= 0:
+            raise ValueError("Сумма снятия должна быть положительной")
+
+        if self._balance - amount < -self.overdraft_limit:
+            raise ValueError("Превышен лимит овердрафта")
+
+        self._balance -= amount
 
 acc = SavingsAccount("Анна")
 acc.deposit(500)
